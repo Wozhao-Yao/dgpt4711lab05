@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Simple;
+namespace Simple\Models;
 
 /**
  * SimpleModel persisted as CSV document
