@@ -6,10 +6,6 @@
     <description>A special administrative region on the eastern side of the Pearl River estuary in southern China.</description>
     <link>http://www.discoverhongkong.com/eng/index.jsp</link>
     <image>hongkong.jpg</image>
-	<deadline/>
-    </status>
-    <flag/>
-    <submit>Update the TODO task</submit>
   </record>
   <record>
     <id>2</id>
@@ -17,9 +13,6 @@
     <description>A special administrative region on the western side of the Pearl River estuary in southern China.</description>
     <link>http://en.macaotourism.gov.mo/index.php</link>
     <image>macau.jpg</image>
-    <deadline/>
-    <status/>
-    <flag/>
   </record>
   <record>
     <id>3</id>
@@ -27,9 +20,6 @@
     <description>A country at the centre of the Southeast Asian Indochinese peninsula composed of 76 provinces.</description>
     <link>http://www.tourismthailand.org/'</link>
     <image>thailand.jpg</image>
-    <deadline/>
-    <status/>
-    <flag/>
   </record>
   <record>
     <id>4</id>
@@ -37,9 +27,6 @@
     <description>An island country in East Asia.</description>
     <link>http://www.jnto.go.jp/eng/</link>
     <image>japan.jpg</image>
-    <deadline/>
-    <status/>
-    <flag/>
   </record>
   <record>
     <id>5</id>
@@ -47,9 +34,5 @@
     <description>The easternmost country on the Indochina Peninsula.</description>
     <link>http://www.vietnamtourism.gov.vn/english/</link>
     <image>vietnam.jpg</image>
-    <deadline/>
-    <status/>
-    <flag/>
-	<submit>Update the TODO task</submit>
   </record>
 </root>

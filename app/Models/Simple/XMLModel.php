@@ -1,5 +1,5 @@
 <?php
-namespace Simple\Models;
+namespace App\Models\Simple;
 
 /**
  * SimpleModel persisted as XML document
@@ -7,15 +7,16 @@ namespace Simple\Models;
  */
 class XMLModel extends SimpleModel
 {
+
 	/**
 	 * Constructor.
 	 * @param string $origin Filename of the CSV file
-	 * @param string $keyfield  Name of the primary key field
+	 * @param string $keyField  Name of the primary key field
 	 * @param string $entity	Entity name meaningful to the persistence
 	 */
-	function __construct($origin = null, $keyfield = 'id', $entity = null)
+	function __construct($origin = null, $keyField = 'id', $entity = null)
 	{
-		parent::__construct();
+		parent::__construct($origin, $keyField, $entity);
 
 		// and populate the collection
 		$this->load();
@@ -26,25 +27,37 @@ class XMLModel extends SimpleModel
 	 */
 	protected function load()
 	{
+<<<<<<< HEAD
 
 		
 		if (($tasks = simplexml_load_file($this->_origin)) !== FALSE)
+=======
+		if (file_exists(realpath($this->origin)))
+>>>>>>> master
 		{
-			foreach ($tasks as $task) {
-				$record = new stdClass();
-				$record->id = (int) $task->id;
-				$record->task = (string) $task->task;
-				$record->priority = (int) $task->priority;
-				$record->size = (int) $task->size;
-				$record->group = (int) $task->group;
-				$record->deadline = (string) $task->deadline;
-				$record->status = (int) $task->status;
-				$record->flag = (int) $task->flag;
 
-				$this->_data[$record->id] = $record;
+			$xml = simplexml_load_file(realpath($this->origin));
+
+			$first = true;
+			foreach ($xml->children() as $child)
+			{
+				$record = new \stdClass();
+				foreach ($child->children() as $kid)
+				{
+					$key = $kid->getName();
+					$value = (string) $kid;
+					$record->$key = $value;
+					if ($key == $this->keyField)
+						$id = $value;
+					if ($first)
+						$this->fields[] = $key;
+				}
+				$this->data[$id] = $record;
+				$first = false;
 			}
 		}
 
+<<<<<<< HEAD
 		// rebuild the keys table
 		$this->reindex();
 
@@ -105,6 +118,8 @@ class XMLModel extends SimpleModel
 		    exit('Failed to open the xml file.');
 		}
 
+=======
+>>>>>>> master
 		// --------------------
 		// rebuild the keys table
 		$this->reindex();
@@ -115,6 +130,7 @@ class XMLModel extends SimpleModel
 	 */
 	protected function store()
 	{
+<<<<<<< HEAD
 		
 		// rebuild the keys table
 		$this->reindex();
@@ -148,3 +164,25 @@ class XMLModel extends SimpleModel
             $xmlDoc->save($this->_origin);
 		}
 	}
+=======
+		$xmlDoc = new DOMDocument("1.0");
+		$xmlDoc->preserveWhiteSpace = false;
+		$xmlDoc->formatOutput = true;
+		$data = $xmlDoc->createElement('root');
+		foreach ($this->data as $key => $value)
+		{
+			$record = $xmlDoc->createElement('record');
+			foreach ($value as $itemkey => $datum)
+			{
+				$item = $xmlDoc->createElement($itemkey, htmlspecialchars($datum));
+				$record->appendChild($item);
+			}
+			$data->appendChild($record);
+		}
+		$xmlDoc->appendChild($data);
+		$xmlDoc->save($this->origin);
+		//echo $xmlDoc->saveXML();
+	}
+
+}
+>>>>>>> master

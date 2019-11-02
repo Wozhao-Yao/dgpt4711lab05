@@ -9,13 +9,26 @@ class Travel extends BaseController
     $places = new \App\Models\Places();
         // retrieve all the records
     $records = $places->findAll();
+    $view = \Config\Services::renderer();
     
-        // get a template parser
+    $table = new \CodeIgniter\View\Table();
+       
     $parser = \Config\Services::parser();
         // tell it about the substitions
-    return $parser->setData(['records' => $records])
+    //return $parser->setData(['records' => $records])
         // and have it render the template with those
-    ->render('placeslist');
+    //->render('placeslist');
+    $table->setHeading('ID', 'Name', 'Description');
+    //add table row
+    $table->addRow(['1', 'HongKong', 'Southern']);
+    $table->addRow(['2', 'Macau', 'Southern']);
+    $table->addRow(['3', 'Thailand', 'Thailand']);
+    $content =  $table->generate();
+    
+    $output = $view->render('top') .
+        $view->render('placeslist') .
+        $view->render('bottom');
+    return $output;
     }
     public function showme($id)
     {
