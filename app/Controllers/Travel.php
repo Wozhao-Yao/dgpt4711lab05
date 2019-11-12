@@ -20,13 +20,16 @@ class Travel extends BaseController
     //->render('placeslist');
     $table->setHeading('ID', 'Name', 'Description');
     //add table row
-    $table->addRow(['1', 'HongKong', 'Southern']);
-    $table->addRow(['2', 'Macau', 'Southern']);
-    $table->addRow(['3', 'Thailand', 'Thailand']);
+    foreach ($records as $key=>$value)
+    {
+        $table->addRow([$value->id, 'HongKong', 'Southern']);
+    }
+    
     $content =  $table->generate();
     
+    
     $output = $view->render('top') .
-        $view->render('placeslist') .
+        $content .
         $view->render('bottom');
     return $output;
     }
